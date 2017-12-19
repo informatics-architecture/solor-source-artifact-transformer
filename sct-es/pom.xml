@@ -2,7 +2,7 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>one.solor</groupId>
    <artifactId>sct-es-rf2</artifactId>
-   <version>20171031T120000Z-SNAPSHOT</version>
+   <version>20171031T120000Z</version>
 
    <packaging>pom</packaging>
 
