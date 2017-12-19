@@ -5,7 +5,7 @@ cd ../sct-es
 mvn clean install
 cd ../sct-loinc
 mvn clean install
-cd ../sct-rf2
+cd ../sct
 mvn clean install
 cd ../sct-uk
 mvn clean install
