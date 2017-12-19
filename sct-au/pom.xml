@@ -2,7 +2,7 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>one.solor</groupId>
    <artifactId>sct-au</artifactId>
-   <version>20171031-SNAPSHOT</version>
+   <version>20171031</version>
 
    <packaging>pom</packaging>
 
