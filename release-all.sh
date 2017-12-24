@@ -9,7 +9,7 @@ cd ../sct
 mvn jgitflow:release-start jgitflow:release-finish
 cd ../sct-uk
 mvn jgitflow:release-start jgitflow:release-finish
-cd ../sct-uk-drug
+cd ../sct-uk-dmd
 mvn jgitflow:release-start jgitflow:release-finish
 cd ../sct-us
 mvn jgitflow:release-start jgitflow:release-finish
