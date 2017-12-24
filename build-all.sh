@@ -9,7 +9,7 @@ cd ../sct
 mvn clean install
 cd ../sct-uk
 mvn clean install
-cd ../sct-uk-drug
+cd ../sct-uk-dmd
 mvn clean install
 cd ../sct-us
 mvn clean install
