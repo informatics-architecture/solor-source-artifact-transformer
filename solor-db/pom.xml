@@ -271,6 +271,23 @@
                </execution>
             </executions>
          </plugin>
+          <plugin>
+              <groupId>external.atlassian.jgitflow</groupId>
+              <artifactId>jgitflow-maven-plugin</artifactId>
+              <version>${jgitflow-maven-plugin.version}</version>
+              <configuration>
+                  <pushReleases>true</pushReleases>
+                  <autoVersionSubmodules>true</autoVersionSubmodules>
+                  <scmCommentPrefix>[jgitflow-plugin] </scmCommentPrefix>
+                  <enableSshAgent>true</enableSshAgent>
+                  <allowSnapshots>false</allowSnapshots>
+                  <enableFeatureVersions>true</enableFeatureVersions>
+                  <releaseBranchPrefix>solor-db-release-</releaseBranchPrefix>
+                  <versionTagPrefix>solor-db-version-</versionTagPrefix>
+                  <username>${git.user}</username>
+                  <password>${git.password}</password>
+              </configuration>
+          </plugin>
       </plugins>
    </build>
 </project>
