@@ -4,7 +4,7 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.44</version>
+        <version>4.45</version>
     </parent>
     
     <groupId>one.solor</groupId>
@@ -31,6 +31,7 @@
         <!-- Don't edit these -->
         <inParent>false</inParent>
         <isaac-metadata.version>${project.parent.version}</isaac-metadata.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
     <licenses>

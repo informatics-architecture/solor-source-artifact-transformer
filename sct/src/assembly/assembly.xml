@@ -5,6 +5,7 @@
 	<formats>
 		<format>zip</format>
 	</formats>
+	
 	<fileSets>
 		<fileSet>
 			<directory>${project.build.directory}/processed/</directory>
@@ -18,4 +19,5 @@
 		</fileSet>
 	</fileSets>
 	<includeBaseDirectory>false</includeBaseDirectory>
+	
 </assembly>
