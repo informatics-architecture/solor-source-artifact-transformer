@@ -9,7 +9,7 @@
 	<fileSets>
 		<fileSet>
 			<directory>${project.build.directory}/${project.build.finalName}.data</directory>
-			<outputDirectory>/</outputDirectory>
+			<outputDirectory></outputDirectory>
 		</fileSet>
 	</fileSets>
 </assembly>

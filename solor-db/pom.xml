@@ -4,14 +4,14 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.44</version>
+        <version>4.45</version>
     </parent>
     
     <groupId>one.solor</groupId>
     <artifactId>solor-db</artifactId>
     <name>${project.parent.artifactId}: ${project.artifactId}</name>
     
-    <version>1.8</version>
+    <version>1.10</version>
     <packaging>pom</packaging>
     
     <description>An ISAAC database, including Snomed</description>
@@ -31,6 +31,7 @@
         <!-- Don't edit these -->
         <inParent>false</inParent>
         <isaac-metadata.version>${project.parent.version}</isaac-metadata.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
     <licenses>

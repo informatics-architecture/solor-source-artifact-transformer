@@ -24,6 +24,7 @@
    <properties>
       <solor.source.name>SnomedCT_UKDrugRF2_Production_20171011T000001Z.zip</solor.source.name>
       <isaac.version>4.42</isaac.version>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
    </properties>
    <build>
       <plugins>
