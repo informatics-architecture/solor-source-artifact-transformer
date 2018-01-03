@@ -11,7 +11,7 @@
     <artifactId>solor-db</artifactId>
     <name>${project.parent.artifactId}: ${project.artifactId}</name>
     
-    <version>1.9-SNAPSHOT</version>
+    <version>1.10-SNAPSHOT</version>
     <packaging>pom</packaging>
     
     <description>An ISAAC database, including Snomed</description>
