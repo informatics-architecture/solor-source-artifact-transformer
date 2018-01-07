@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>sh.isaac.integration</groupId>
+        <artifactId>db-builder</artifactId>
+        <version>4.46-SNAPSHOT</version>
+    </parent>
+    
+    <groupId>one.solor</groupId>
+    <artifactId>solor-snap-db</artifactId>
+    <name>${project.parent.artifactId}: ${project.artifactId}</name>
+    
+    <version>1.12-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    
+    <description>An ISAAC database, including Snomed SNAPSHOT data</description>
+    
+    <properties>
+        <sct.version>20170731T150000Z</sct.version>
+        <sct-au.version>20171031</sct-au.version>
+        <sct-es.version>20171031T120000Z</sct-es.version>
+        <sct-loinc.version>20170831T120000Z</sct-loinc.version>
+        <sct-uk.version>20171001T000001Z</sct-uk.version>
+        <sct-uk-dmd.version>20171011T000001Z</sct-uk-dmd.version>
+        <sct-us.version>20170901T120000Z</sct-us.version>
+
+        <loinc.version>2015.08.01-loader-5.5</loinc.version>
+        <rxnorm.version>2016.05.02-loader-5.2</rxnorm.version>
+
+        <!-- Don't edit these -->
+        <inParent>false</inParent>
+        <isaac-metadata.version>${project.parent.version}</isaac-metadata.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>Copyright Notice
+                This is a work of the U.S. Government and is not subject to copyright
+                protection in the United States. Foreign copyrights may apply.
+            </comments>
+        </license>
+        <license>
+            <name>SNOMED CT affiliate license agreement</name>
+            <url>https://uts.nlm.nih.gov/help/license/LicenseAgreement.pdf</url>
+            <comments>The SNOMED CT content packaged by this module is governed by the SNOMED CT affiliate license agreement</comments>
+        </license>
+    </licenses>
+    
+
+    <dependencies>
+        <!-- Metadata -->
+        <dependency>
+            <groupId>sh.isaac.core</groupId>
+            <artifactId>metadata</artifactId>
+            <version>${isaac-metadata.version}</version>
+            <classifier>all</classifier>
+            <type>ibdf.zip</type>
+            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+        </dependency>
+        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct</artifactId>
+            <version>${sct.version}</version>
+            <type>zip</type>
+            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-au</artifactId>
+            <version>${sct-au.version}</version>
+            <type>zip</type>
+            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-es</artifactId>
+            <version>${sct-es.version}</version>
+            <type>zip</type>
+            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-loinc</artifactId>
+            <version>${sct-loinc.version}</version>
+            <type>zip</type>
+            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-uk</artifactId>
+            <version>${sct-uk.version}</version>
+            <type>zip</type>
+            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-uk-dmd</artifactId>
+            <version>${sct-uk-dmd.version}</version>
+            <type>zip</type>
+            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-us</artifactId>
+            <version>${sct-us.version}</version>
+            <type>zip</type>
+            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+
+<!--  
+        <!-\- LOINC -\->
+        <dependency>
+            <groupId>gov.vha.isaac.terminology.converted</groupId>
+            <artifactId>loinc-ibdf-tech-preview</artifactId>
+            <version>2015.08.01-loader-5.8-SNAPSHOT</version>
+            <type>ibdf.zip</type>
+            <optional>true</optional> <!-\- Not needed at runtime / transitively -\->
+            <scope>compile</scope>
+        </dependency>
+        
+      <dependency>
+          <groupId>gov.vha.isaac.terminology.converted</groupId>
+          <artifactId>rxnorm-ibdf</artifactId>
+          <version>2016.12.05-loader-5.5-SNAPSHOT</version>
+          <type>ibdf.zip</type>
+          <optional>true</optional> <!-\- Not needed at runtime / transitively -\->
+          <scope>compile</scope>
+      </dependency> -->
+   </dependencies>
+
+   <build>
+      <plugins>
+         <!-- Unpack data projects, load econcepts files,repack database -->
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <executions>
+               <execution>
+                  <id>zip</id>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>single</goal>
+                  </goals>
+                  <configuration>
+                     <appendAssemblyId>false</appendAssemblyId>
+                     <descriptors>
+                        <descriptor>${basedir}/src/assembly/cradle.xml</descriptor>
+                     </descriptors>
+                     <encoding>UTF-8</encoding>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+               <execution>
+                  <id>copy-rf2</id>
+                  <phase>generate-resources</phase>
+                  <goals>
+                     <goal>copy-dependencies</goal>
+                  </goals>
+                  <configuration>
+                     <includeArtifactIds>sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us</includeArtifactIds>
+                     <outputDirectory>${project.build.directory}/data</outputDirectory>
+                  </configuration>
+               </execution>
+               <execution>
+                  <id>extract-ibdf</id>
+                  <phase>generate-resources</phase>
+                  <goals>
+                     <goal>unpack-dependencies</goal>
+                  </goals>
+                  <configuration>
+                     <includeArtifactIds>metadata</includeArtifactIds>
+                     <outputDirectory>${project.build.directory}/data</outputDirectory>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>sh.isaac.core</groupId>
+            <artifactId>mojo</artifactId>
+            <executions>
+               <execution>
+                  <id>setup-isaac</id>
+                  <goals>
+                     <goal>setup-isaac</goal>
+                     <goal>count-concepts</goal>
+                  </goals>
+                  <configuration>
+                     <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
+                  </configuration>
+               </execution>
+               <execution>
+                  <id>load-ibdf-metadata</id>
+                  <goals>
+                     <goal>load-termstore</goal>
+                  </goals>
+                  <configuration>
+                     <ibdfFiles>
+                        <ibdfFile>${project.build.directory}/data/IsaacMetadataAuxiliary.ibdf</ibdfFile>
+                                
+                        <!--                               <ibdfFile>${project.build.directory}/data/rf2-ibdf-sct-Full.ibdf</ibdfFile> --> 
+                        <!--                                <ibdfFile>${project.build.directory}/data/loinc-ibdf-tech-preview.ibdf</ibdfFile> --> 
+                        <!--                                <ibdfFile>${project.build.directory}/data/rxnorm-ibdf.ibdf</ibdfFile> --> 
+                        <!--                                <ibdfFile>${project.build.directory}/data/rf2-ibdf-us-extension-Full.ibdf</ibdfFile> --> 
+                     </ibdfFiles>
+                  </configuration>
+               </execution>                    
+               <execution>
+                  <id>count-after-load</id>
+                  <goals>
+                     <goal>count-concepts</goal>
+                  </goals>
+               </execution>
+               <execution>
+                  <id>index</id>
+                  <goals>
+                     <goal>index-termstore</goal>
+                  </goals>
+               </execution>
+               <execution>
+                   <id>classify</id>
+                   <goals>
+                       <goal>quasi-mojo-executor</goal>
+                       <goal>index-termstore</goal>
+                   </goals>
+                   <configuration>
+                       <quasiMojoName>full-classification</quasiMojoName>
+                   </configuration>
+               </execution>
+               <execution>
+                  <id>shutdown</id>
+                  <goals>
+                     <!-- <goal>stop-heap-ticker</goal>
+                     <goal>stop-tasks-ticker</goal>-->
+                     <goal>shutdown-isaac</goal>
+                           
+                  </goals>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <groupId>sh.isaac.solor</groupId>
+            <artifactId>solor-mojo</artifactId>
+            <executions>
+               <execution>
+                  <id>solor-import</id>
+                  <phase>process-resources</phase>
+                  <goals>
+                     <goal>solor-import</goal>
+                  </goals>
+                  <configuration>
+                      <importType>SNAPSHOT</importType>
+                     <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+          <plugin>
+              <groupId>external.atlassian.jgitflow</groupId>
+              <artifactId>jgitflow-maven-plugin</artifactId>
+              <version>${jgitflow-maven-plugin.version}</version>
+              <configuration>
+                  <pushReleases>true</pushReleases>
+                  <autoVersionSubmodules>true</autoVersionSubmodules>
+                  <scmCommentPrefix>[jgitflow-plugin] </scmCommentPrefix>
+                  <enableSshAgent>true</enableSshAgent>
+                  <allowSnapshots>false</allowSnapshots>
+                  <enableFeatureVersions>true</enableFeatureVersions>
+                  <releaseBranchPrefix>solor-db-release-</releaseBranchPrefix>
+                  <versionTagPrefix>solor-db-version-</versionTagPrefix>
+                  <username>${git.user}</username>
+                  <password>${git.password}</password>
+              </configuration>
+          </plugin>
+      </plugins>
+   </build>
+</project>
