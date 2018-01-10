@@ -265,7 +265,7 @@
                      <goal>solor-import</goal>
                   </goals>
                   <configuration>
-                      <importType>SNAPSHOT</importType>
+                      <importType>ACTIVE_ONLY</importType>
                      <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
                   </configuration>
                </execution>
