@@ -4,7 +4,7 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.45</version>
+        <version>4.46-SNAPSHOT</version>
     </parent>
     
     <groupId>one.solor</groupId>
@@ -208,7 +208,7 @@
                <execution>
                   <id>load-ibdf-metadata</id>
                   <goals>
-                     <goal>load-termstore</goal>
+                     <goal>load-termstore-semaphore</goal>
                   </goals>
                   <configuration>
                      <ibdfFiles>
@@ -265,6 +265,7 @@
                      <goal>solor-import</goal>
                   </goals>
                   <configuration>
+                      <importType>FULL</importType>
                      <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
                   </configuration>
                </execution>
