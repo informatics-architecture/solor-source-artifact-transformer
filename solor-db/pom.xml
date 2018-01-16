@@ -4,7 +4,7 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.46-SNAPSHOT</version>
+        <version>4.47-SNAPSHOT</version>
     </parent>
     
     <groupId>one.solor</groupId>
@@ -266,6 +266,7 @@
                   </goals>
                   <configuration>
                       <importType>FULL</importType>
+                      <transform>true</transform>
                      <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
                   </configuration>
                </execution>

@@ -21,7 +21,7 @@ minutes.
 ## Setting sufficient memory
 On the command line executing the process, execute the following: 
 ```
-$export MAVEN_OPTS="-Xmx12g -XX:+UseG1GC"
+$ export MAVEN_OPTS="-Xmx12g -XX:+UseG1GC"
 ```
 ## Performing a release
 

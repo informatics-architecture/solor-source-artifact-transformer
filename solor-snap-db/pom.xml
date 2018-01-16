@@ -4,7 +4,7 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.46-SNAPSHOT</version>
+        <version>4.47-SNAPSHOT</version>
     </parent>
     
     <groupId>one.solor</groupId>
@@ -70,12 +70,12 @@
             <optional>true</optional> <!-- Not needed at runtime / transitively -->
             <scope>compile</scope>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct-au</artifactId>
             <version>${sct-au.version}</version>
             <type>zip</type>
-            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <optional>true</optional>  Not needed at runtime / transitively 
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -83,9 +83,9 @@
             <artifactId>sct-es</artifactId>
             <version>${sct-es.version}</version>
             <type>zip</type>
-            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <optional>true</optional>  Not needed at runtime / transitively 
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct-loinc</artifactId>
@@ -94,12 +94,12 @@
             <optional>true</optional> <!-- Not needed at runtime / transitively -->
             <scope>compile</scope>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct-uk</artifactId>
             <version>${sct-uk.version}</version>
             <type>zip</type>
-            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <optional>true</optional>  Not needed at runtime / transitively 
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -107,7 +107,7 @@
             <artifactId>sct-uk-dmd</artifactId>
             <version>${sct-uk-dmd.version}</version>
             <type>zip</type>
-            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <optional>true</optional>  Not needed at runtime / transitively 
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -115,9 +115,9 @@
             <artifactId>sct-us</artifactId>
             <version>${sct-us.version}</version>
             <type>zip</type>
-            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <optional>true</optional>  Not needed at runtime / transitively 
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
 
 <!--  
         <!-\- LOINC -\->
@@ -265,6 +265,7 @@
                      <goal>solor-import</goal>
                   </goals>
                   <configuration>
+                      <transform>true</transform>
                       <importType>ACTIVE_ONLY</importType>
                      <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
                   </configuration>
