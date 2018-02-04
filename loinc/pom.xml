@@ -2,7 +2,7 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>one.solor</groupId>
    <artifactId>loinc</artifactId>
-   <version>2.63-b2-SNAPSHOT</version>
+   <version>2.63</version>
 
    <packaging>pom</packaging>
 
