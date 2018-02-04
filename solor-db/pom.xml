@@ -4,14 +4,14 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.45</version>
+        <version>4.47-SNAPSHOT</version>
     </parent>
     
     <groupId>one.solor</groupId>
     <artifactId>solor-db</artifactId>
     <name>${project.parent.artifactId}: ${project.artifactId}</name>
     
-    <version>1.11</version>
+    <version>1.13-SNAPSHOT</version>
     <packaging>pom</packaging>
     
     <description>An ISAAC database, including Snomed</description>
@@ -208,7 +208,7 @@
                <execution>
                   <id>load-ibdf-metadata</id>
                   <goals>
-                     <goal>load-termstore</goal>
+                     <goal>load-termstore-semaphore</goal>
                   </goals>
                   <configuration>
                      <ibdfFiles>
@@ -265,6 +265,8 @@
                      <goal>solor-import</goal>
                   </goals>
                   <configuration>
+                      <importType>FULL</importType>
+                      <transform>true</transform>
                      <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
                   </configuration>
                </execution>

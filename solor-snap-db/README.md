@@ -21,8 +21,13 @@ minutes.
 ## Setting sufficient memory
 On the command line executing the process, execute the following: 
 ```
-$ export MAVEN_OPTS="-Xmx12g -XX:+UseG1GC"
+$export MAVEN_OPTS="-Xmx12g -XX:+UseG1GC"
 ```
+to confirm the maven settings, execute the following: 
+```
+$echo $MAVEN_OPTS
+```
+
 ## Performing a release
 
 Substitute your server address for example.com in the below example. 

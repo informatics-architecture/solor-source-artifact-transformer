@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>one.solor</groupId>
+   <artifactId>loinc</artifactId>
+   <version>2.63</version>
+
+   <packaging>pom</packaging>
+
+   <name>LOINC content in text format</name>
+
+   <licenses>
+      <license>
+         <name>The Apache Software License, Version 2.0</name>
+         <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+         <distribution>repo</distribution>
+      </license>
+      <license>
+         <name>SNOMED CT affiliate license agreement</name>
+         <url>https://loinc.org/license/</url>
+         <comments>The LOINC content packaged by this module 
+            is governed by the LOINC license agreement.</comments>
+      </license>
+   </licenses>
+   <properties>
+      <loinc.version>2.63</loinc.version>
+      <isaac.version>4.42</isaac.version>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+   </properties>
+   <dependencies>
+      <dependency>
+         <groupId>org.loinc</groupId>
+         <artifactId>loinc-text</artifactId>
+         <version>${loinc.version}</version>
+         <scope>system</scope>
+         <type>zip</type>
+         <systemPath>${basedir}/../solor-terminology-sources/LOINC_${loinc.version}_Text.zip</systemPath>
+      </dependency>
+   </dependencies>
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>external.atlassian.jgitflow</groupId>
+            <artifactId>jgitflow-maven-plugin</artifactId>
+            <version>1.0-m5.1</version>
+            <configuration>
+               <pushReleases>true</pushReleases>
+               <autoVersionSubmodules>true</autoVersionSubmodules>
+               <scmCommentPrefix>[jgitflow-plugin] </scmCommentPrefix>
+               <enableSshAgent>true</enableSshAgent>
+               <allowSnapshots>false</allowSnapshots>
+               <enableFeatureVersions>true</enableFeatureVersions>
+               <username>${git.user}</username>
+               <password>${git.password}</password>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+               <execution>
+                  <id>copy-loinc</id>
+                  <phase>generate-resources</phase>
+                  <goals>
+                     <goal>unpack-dependencies</goal>
+                  </goals>
+                  <configuration>
+                     <includeArtifactIds>loinc-text</includeArtifactIds>
+                     <outputDirectory>${project.build.directory}/loinc-text</outputDirectory>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+         <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+               <execution>
+                  <id>zip</id>
+                  <goals>
+                     <goal>single</goal>
+                  </goals>
+                  <phase>package</phase>
+                  <configuration>
+                     <appendAssemblyId>false</appendAssemblyId>
+                     <descriptors>
+                        <descriptor>${basedir}/src/assembly/assembly.xml</descriptor>
+                     </descriptors>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+</project>
