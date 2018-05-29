@@ -29,7 +29,7 @@
         <rxnorm.version>2016.05.02-loader-5.2</rxnorm.version>
 
         <!-- Don't edit these -->
-        <inParent>false</inParent>
+        <inParent>true</inParent>
         <isaac-metadata.version>${project.parent.version}</isaac-metadata.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -75,26 +75,6 @@
     <build>
         <plugins>
             <!-- Unpack data projects, load econcepts files,repack database -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>zip</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <appendAssemblyId>false</appendAssemblyId>
-                            <descriptors>
-                                <descriptor>${basedir}/src/assembly/cradle.xml</descriptor>
-                            </descriptors>
-                            <encoding>UTF-8</encoding>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -184,6 +164,75 @@
             <plugin>
                 <groupId>sh.isaac.solor</groupId>
                 <artifactId>solor-mojo</artifactId>
+                <version>${project.parent.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>progress</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>chronology</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>query</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>filesystem-datastore</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.core</groupId>
+                        <artifactId>metacontent</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>ibdf</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>commit</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>path</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>stamp</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>coordinate</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>memory-managment</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>logic</artifactId>
+                        <version>${project.parent.version}</version>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>sh.isaac.provider</groupId>
+                                <artifactId>taxonomy</artifactId>
+                            </exclusion>
+                        </exclusions>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <id>solor-import</id>
@@ -199,6 +248,47 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>zip</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <skipAssembly>false</skipAssembly>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>${basedir}/src/assembly/cradle.xml</descriptor>
+                            </descriptors>
+                            <encoding>UTF-8</encoding>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+<!--            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-db-artifact</id>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <skipAttach>false</skipAttach>
+                            <artifacts>
+                                <artifact>
+                                    <file>${project.build.directory}/${project.build.finalName}.zip</file>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>            -->
             <plugin>
                 <groupId>external.atlassian.jgitflow</groupId>
                 <artifactId>jgitflow-maven-plugin</artifactId>
@@ -216,6 +306,27 @@
                     <password>${git.password}</password>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <executions>
+                    <execution>
+                        <id>install-zip</id>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <phase>install</phase>
+                        <configuration>
+                            <skip>false</skip>
+                            <file>${project.build.directory}/${project.build.finalName}.zip</file>
+                            <packaging>zip</packaging>
+                            <pomFile>${basedir}/pom.xml</pomFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+          
         </plugins>
     </build>
     <profiles>
@@ -243,7 +354,7 @@
                     <optional>true</optional> <!-- Not needed at runtime / transitively -->
                     <scope>compile</scope>
                 </dependency>
-               <dependency>
+                <dependency>
                     <groupId>one.solor</groupId>
                     <artifactId>loinc</artifactId>
                     <version>${loinc.version}</version>
