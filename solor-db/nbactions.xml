@@ -10,7 +10,7 @@
                 <goal>install</goal>
             </goals>
             <properties>
-                <Env.MAVEN_OPTS>-Xmx36g -Xms36g</Env.MAVEN_OPTS>
+                <Env.MAVEN_OPTS>-Xmx16g -Xms16g</Env.MAVEN_OPTS>
             </properties>
         </action>
         <action>
@@ -24,7 +24,7 @@
                 <goal>install</goal>
             </goals>
             <properties>
-                <Env.MAVEN_OPTS>-Xmx36g -Xms36g</Env.MAVEN_OPTS>
+                <Env.MAVEN_OPTS>-Xmx16g -Xms16g</Env.MAVEN_OPTS>
             </properties>
         </action>
         <action>
