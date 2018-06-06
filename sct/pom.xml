@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>one.solor</groupId>
     <artifactId>sct</artifactId>
-    <version>20170731T150000Z-build2-SNAPSHOT</version>
+    <version>20180131T120000Z-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -22,8 +22,8 @@
         </license>
     </licenses>
     <properties>
-        <solor.source.name>SnomedCT_InternationalRF2_PRODUCTION_20170731T150000Z.zip</solor.source.name>
-        <isaac.version>4.48-SNAPSHOT</isaac.version>
+        <solor.source.name>SnomedCT_InternationalRF2_PRODUCTION_20180131T120000Z.zip</solor.source.name>
+        <isaac.version>4.48</isaac.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <build>
