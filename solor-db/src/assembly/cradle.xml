@@ -6,10 +6,20 @@
 		<format>zip</format>
 	</formats>
 	<baseDirectory>/</baseDirectory>
+	<files>
+		<file>
+			<source>${basedir}/pom.xml</source>
+			<outputDirectory>META-INF/maven/${groupId}/${artifactId}</outputDirectory>
+		</file>
+	</files>
 	<fileSets>
 		<fileSet>
 			<directory>${project.build.directory}/${project.build.finalName}.data</directory>
 			<outputDirectory></outputDirectory>
+		</fileSet>
+		<fileSet>
+			<directory>${basedir}/src</directory>
+			<outputDirectory>META-INF/maven/${groupId}/${artifactId}/src</outputDirectory>
 		</fileSet>
 	</fileSets>
 </assembly>

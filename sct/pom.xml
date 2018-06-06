@@ -1,96 +1,69 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-   <groupId>one.solor</groupId>
-   <artifactId>sct</artifactId>
-   <version>20170731T150000Z-build2-SNAPSHOT</version>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>one.solor</groupId>
+    <artifactId>sct</artifactId>
+    <version>sct-20180131T120000Z</version>
 
-   <packaging>pom</packaging>
+    <packaging>pom</packaging>
 
-   <name>SNOMED Clinical Terms in RF2 format</name>
+    <name>SNOMED Clinical Terms in RF2 format</name>
 
-   <licenses>
-      <license>
-         <name>The Apache Software License, Version 2.0</name>
-         <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-         <distribution>repo</distribution>
-      </license>
-      <license>
-         <name>SNOMED CT affiliate license agreement</name>
-         <url>https://uts.nlm.nih.gov/help/license/LicenseAgreement.pdf</url>
-         <comments>The SNOMED CT content packaged by this module 
-            is governed by the SNOMED CT affiliate license agreement.</comments>
-      </license>
-   </licenses>
-   <properties>
-      <solor.source.name>SnomedCT_InternationalRF2_PRODUCTION_20170731T150000Z.zip</solor.source.name>
-      <isaac.version>4.42</isaac.version>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-   </properties>
-   <build>
-      <plugins>
-         <plugin>
-            <groupId>external.atlassian.jgitflow</groupId>
-            <artifactId>jgitflow-maven-plugin</artifactId>
-            <version>1.0-m5.1</version>
-            <configuration>
-               <pushReleases>true</pushReleases>
-               <autoVersionSubmodules>true</autoVersionSubmodules>
-               <scmCommentPrefix>[jgitflow-plugin] </scmCommentPrefix>
-               <enableSshAgent>true</enableSshAgent>
-               <allowSnapshots>false</allowSnapshots>
-               <enableFeatureVersions>true</enableFeatureVersions>
-               <username>${git.user}</username>
-               <password>${git.password}</password>
-            </configuration>
-         </plugin>
-         <plugin>
-            <groupId>sh.isaac.solor</groupId>
-            <artifactId>rf2-mojo</artifactId>
-            <version>${isaac.version}</version>
-            <dependencies>
-               <dependency>
-                  <groupId>sh.isaac.integration</groupId>
-                  <artifactId>import-utils</artifactId>
-                  <version>${isaac.version}</version>
-                  <exclusions>
-                     <exclusion>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>bdb-chronology</artifactId>
-                     </exclusion>
-                  </exclusions>
-               </dependency>
-            </dependencies>
-            <executions>
-               <execution>
-                  <id>strip-dates-from-file-names</id>
-                  <goals>
-                     <goal>add-rf2-distribution</goal>
-                  </goals>
-                  <configuration>
-                     <rf2WithDatesLocation>${project.basedir}/../solor-terminology-sources/${solor.source.name}</rf2WithDatesLocation>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
-         <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>3.1.0</version>
-            <executions>
-               <execution>
-                  <id>zip</id>
-                  <goals>
-                     <goal>single</goal>
-                  </goals>
-                  <phase>package</phase>
-                  <configuration>
-                     <appendAssemblyId>false</appendAssemblyId>
-                     <descriptors>
-                        <descriptor>${basedir}/src/assembly/assembly.xml</descriptor>
-                     </descriptors>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
-      </plugins>
-   </build>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+        <license>
+            <name>SNOMED CT affiliate license agreement</name>
+            <url>https://uts.nlm.nih.gov/help/license/LicenseAgreement.pdf</url>
+            <comments>The SNOMED CT content packaged by this module 
+                is governed by the SNOMED CT affiliate license agreement.</comments>
+        </license>
+    </licenses>
+    <properties>
+        <solor.source.name>SnomedCT_InternationalRF2_PRODUCTION_20180131T120000Z.zip</solor.source.name>
+        <isaac.version>4.48</isaac.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>external.atlassian.jgitflow</groupId>
+                <artifactId>jgitflow-maven-plugin</artifactId>
+                <version>1.0-m5.1</version>
+                <configuration>
+                    <pushReleases>true</pushReleases>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <scmCommentPrefix>[jgitflow-plugin] </scmCommentPrefix>
+                    <enableSshAgent>true</enableSshAgent>
+                    <allowSnapshots>false</allowSnapshots>
+                    <enableFeatureVersions>true</enableFeatureVersions>
+                    <username>${git.user}</username>
+                    <password>${git.password}</password>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-artifact</id>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <type>zip</type>
+                                    <file>${basedir}/../solor-terminology-sources/${solor.source.name}</file>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
