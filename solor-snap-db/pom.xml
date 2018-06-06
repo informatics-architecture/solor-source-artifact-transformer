@@ -4,7 +4,7 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.48-SNAPSHOT</version>
+        <version>4.48</version>
     </parent>
     
     <groupId>one.solor</groupId>
@@ -17,7 +17,7 @@
     <description>An ISAAC database, including Snomed SNAPSHOT data</description>
     
     <properties>
-        <sct.version>20170731T150000Z</sct.version>
+        <sct.version>20180131T120000Z</sct.version>
         <sct-au.version>20171031</sct-au.version>
         <sct-es.version>20171031T120000Z</sct-es.version>
         <sct-loinc.version>20170831T120000Z</sct-loinc.version>
