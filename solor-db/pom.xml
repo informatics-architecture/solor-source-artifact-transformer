@@ -4,7 +4,7 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.47-SNAPSHOT</version>
+        <version>4.50-SNAPSHOT</version>
     </parent>
     
     <groupId>one.solor</groupId>
@@ -17,7 +17,7 @@
     <description>An ISAAC database, including Snomed</description>
     
     <properties>
-        <sct.version>20170731T150000Z</sct.version>
+        <sct.version>20180131T120000Z</sct.version>
         <sct-au.version>20171031</sct-au.version>
         <sct-es.version>20171031T120000Z</sct-es.version>
         <sct-loinc.version>20170831T120000Z</sct-loinc.version>
@@ -70,54 +70,54 @@
             <optional>true</optional> <!-- Not needed at runtime / transitively -->
             <scope>compile</scope>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct-au</artifactId>
             <version>${sct-au.version}</version>
             <type>zip</type>
-            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <optional>true</optional>  Not needed at runtime / transitively 
             <scope>compile</scope>
-        </dependency>
-        <dependency>
+        </dependency>-->
+<!--        <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct-es</artifactId>
             <version>${sct-es.version}</version>
             <type>zip</type>
-            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <optional>true</optional>  Not needed at runtime / transitively 
             <scope>compile</scope>
-        </dependency>
-        <dependency>
+        </dependency>-->
+<!--        <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct-loinc</artifactId>
             <version>${sct-loinc.version}</version>
             <type>zip</type>
-            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <optional>true</optional>  Not needed at runtime / transitively 
             <scope>compile</scope>
-        </dependency>
-        <dependency>
+        </dependency>-->
+<!--        <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct-uk</artifactId>
             <version>${sct-uk.version}</version>
             <type>zip</type>
-            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <optional>true</optional>  Not needed at runtime / transitively 
             <scope>compile</scope>
-        </dependency>
-        <dependency>
+        </dependency>-->
+<!--        <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct-uk-dmd</artifactId>
             <version>${sct-uk-dmd.version}</version>
             <type>zip</type>
-            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <optional>true</optional>  Not needed at runtime / transitively 
             <scope>compile</scope>
-        </dependency>
-        <dependency>
+        </dependency>-->
+<!--        <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct-us</artifactId>
             <version>${sct-us.version}</version>
             <type>zip</type>
-            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <optional>true</optional>  Not needed at runtime / transitively 
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
 
 <!--  
         <!-\- LOINC -\->
@@ -174,6 +174,7 @@
          <plugin>
             <groupId>sh.isaac.core</groupId>
             <artifactId>mojo</artifactId>
+            <version>${project.parent.version}</version>
             <executions>
                <execution>
                   <id>setup-isaac</id>
@@ -237,6 +238,7 @@
          <plugin>
             <groupId>sh.isaac.solor</groupId>
             <artifactId>solor-mojo</artifactId>
+            <version>${project.parent.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>sh.isaac.provider</groupId>
