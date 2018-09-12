@@ -11,7 +11,7 @@
     <artifactId>solor-snap-db</artifactId>
     <name>${project.parent.artifactId}: ${project.artifactId}</name>
     
-    <version>1.18-SNAPSHOT</version>
+    <version>1.18</version>
     <packaging>pom</packaging>
     
     <description>An ISAAC database, including Snomed SNAPSHOT data</description>
@@ -214,6 +214,11 @@
                     <dependency>
                         <groupId>sh.isaac.provider</groupId>
                         <artifactId>coordinate</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>datastore-locator</artifactId>
                         <version>${project.parent.version}</version>
                     </dependency>
                     <dependency>
