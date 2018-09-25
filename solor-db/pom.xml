@@ -11,7 +11,7 @@
     <artifactId>solor-db</artifactId>
     <name>${project.parent.artifactId}: ${project.artifactId}</name>
     
-    <version>1.18</version>
+    <version>1.19</version>
     <packaging>pom</packaging>
     
     <description>An ISAAC database, including Snomed</description>
@@ -337,6 +337,7 @@
                      <goal>single</goal>
                   </goals>
                   <configuration>
+                     <skipAssembly>false</skipAssembly>
                      <appendAssemblyId>false</appendAssemblyId>
                      <descriptors>
                         <descriptor>${basedir}/src/assembly/cradle.xml</descriptor>
@@ -363,6 +364,27 @@
                   <password>${git.password}</password>
               </configuration>
           </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>${project.build.directory}/${project.build.finalName}.zip</file>
+                                    <type>zip</type>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
       </plugins>
    </build>
 </project>
