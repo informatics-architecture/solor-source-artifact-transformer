@@ -4,20 +4,20 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.50-SNAPSHOT</version>
+        <version>4.53</version>
     </parent>
     
     <groupId>one.solor</groupId>
     <artifactId>solor-db</artifactId>
     <name>${project.parent.artifactId}: ${project.artifactId}</name>
     
-    <version>1.13-SNAPSHOT</version>
+    <version>1.18-SNAPSHOT</version>
     <packaging>pom</packaging>
     
     <description>An ISAAC database, including Snomed</description>
     
     <properties>
-        <sct.version>20180131T120000Z</sct.version>
+        <sct.version>20180731T120000Z</sct.version>
         <sct-au.version>20171031</sct-au.version>
         <sct-es.version>20171031T120000Z</sct-es.version>
         <sct-loinc.version>20170831T120000Z</sct-loinc.version>
@@ -25,7 +25,7 @@
         <sct-uk-dmd.version>20171011T000001Z</sct-uk-dmd.version>
         <sct-us.version>20170901T120000Z</sct-us.version>
 
-        <loinc.version>2015.08.01-loader-5.5</loinc.version>
+        <loinc.version>2.63</loinc.version>
         <rxnorm.version>2016.05.02-loader-5.2</rxnorm.version>
 
         <!-- Don't edit these -->
@@ -174,7 +174,6 @@
          <plugin>
             <groupId>sh.isaac.core</groupId>
             <artifactId>mojo</artifactId>
-            <version>${project.parent.version}</version>
             <executions>
                <execution>
                   <id>setup-isaac</id>
@@ -288,6 +287,11 @@
                     <dependency>
                         <groupId>sh.isaac.provider</groupId>
                         <artifactId>coordinate</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>datastore-locator</artifactId>
                         <version>${project.parent.version}</version>
                     </dependency>
                     <dependency>
