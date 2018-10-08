@@ -179,7 +179,7 @@
                     <dependency>
                         <groupId>sh.isaac.provider</groupId>
                         <artifactId>identifier</artifactId>
-                        <version>${project.version}</version>
+                        <version>${project.parent.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>sh.isaac.provider</groupId>
