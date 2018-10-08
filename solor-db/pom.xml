@@ -4,7 +4,7 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.53</version>
+        <version>4.54</version>
     </parent>
     
     <groupId>one.solor</groupId>
@@ -130,114 +130,114 @@
             <scope>compile</scope>
         </dependency>
         
-      <dependency>
-          <groupId>gov.vha.isaac.terminology.converted</groupId>
-          <artifactId>rxnorm-ibdf</artifactId>
-          <version>2016.12.05-loader-5.5-SNAPSHOT</version>
-          <type>ibdf.zip</type>
-          <optional>true</optional> <!-\- Not needed at runtime / transitively -\->
-          <scope>compile</scope>
-      </dependency> -->
-   </dependencies>
+        <dependency>
+            <groupId>gov.vha.isaac.terminology.converted</groupId>
+            <artifactId>rxnorm-ibdf</artifactId>
+            <version>2016.12.05-loader-5.5-SNAPSHOT</version>
+            <type>ibdf.zip</type>
+            <optional>true</optional> <!-\- Not needed at runtime / transitively -\->
+            <scope>compile</scope>
+        </dependency> -->
+    </dependencies>
 
-   <build>
-      <plugins>
-         <!-- Unpack data projects, load econcepts files,repack database -->
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <executions>
-               <execution>
-                  <id>copy-rf2</id>
-                  <phase>generate-resources</phase>
-                  <goals>
-                     <goal>copy-dependencies</goal>
-                  </goals>
-                  <configuration>
-                     <includeArtifactIds>sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us</includeArtifactIds>
-                     <outputDirectory>${project.build.directory}/data</outputDirectory>
-                  </configuration>
-               </execution>
-               <execution>
-                  <id>extract-ibdf</id>
-                  <phase>generate-resources</phase>
-                  <goals>
-                     <goal>unpack-dependencies</goal>
-                  </goals>
-                  <configuration>
-                     <includeArtifactIds>metadata</includeArtifactIds>
-                     <outputDirectory>${project.build.directory}/data</outputDirectory>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
-         <plugin>
-            <groupId>sh.isaac.core</groupId>
-            <artifactId>mojo</artifactId>
-            <executions>
-               <execution>
-                  <id>setup-isaac</id>
-                  <goals>
-                     <goal>setup-isaac</goal>
-                     <goal>count-concepts</goal>
-                  </goals>
-                  <configuration>
-                     <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
-                  </configuration>
-               </execution>
-               <execution>
-                  <id>load-ibdf-metadata</id>
-                  <goals>
-                     <goal>load-termstore-semaphore</goal>
-                  </goals>
-                  <configuration>
-                     <ibdfFiles>
-                        <ibdfFile>${project.build.directory}/data/IsaacMetadataAuxiliary.ibdf</ibdfFile>
+    <build>
+        <plugins>
+            <!-- Unpack data projects, load econcepts files,repack database -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-rf2</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeArtifactIds>sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us</includeArtifactIds>
+                            <outputDirectory>${project.build.directory}/data</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>extract-ibdf</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>unpack-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeArtifactIds>metadata</includeArtifactIds>
+                            <outputDirectory>${project.build.directory}/data</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>sh.isaac.core</groupId>
+                <artifactId>mojo</artifactId>
+                <executions>
+                    <execution>
+                        <id>setup-isaac</id>
+                        <goals>
+                            <goal>setup-isaac</goal>
+                            <goal>count-concepts</goal>
+                        </goals>
+                        <configuration>
+                            <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>load-ibdf-metadata</id>
+                        <goals>
+                            <goal>load-termstore-semaphore</goal>
+                        </goals>
+                        <configuration>
+                            <ibdfFiles>
+                                <ibdfFile>${project.build.directory}/data/IsaacMetadataAuxiliary.ibdf</ibdfFile>
                                 
-                        <!--                               <ibdfFile>${project.build.directory}/data/rf2-ibdf-sct-Full.ibdf</ibdfFile> --> 
-                        <!--                                <ibdfFile>${project.build.directory}/data/loinc-ibdf-tech-preview.ibdf</ibdfFile> --> 
-                        <!--                                <ibdfFile>${project.build.directory}/data/rxnorm-ibdf.ibdf</ibdfFile> --> 
-                        <!--                                <ibdfFile>${project.build.directory}/data/rf2-ibdf-us-extension-Full.ibdf</ibdfFile> --> 
-                     </ibdfFiles>
-                  </configuration>
-               </execution>                    
-               <execution>
-                  <id>count-after-load</id>
-                  <goals>
-                     <goal>count-concepts</goal>
-                  </goals>
-               </execution>
-               <execution>
-                  <id>index</id>
-                  <goals>
-                     <goal>index-termstore</goal>
-                  </goals>
-               </execution>
-               <execution>
-                   <id>classify</id>
-                   <goals>
-                       <goal>quasi-mojo-executor</goal>
-                       <goal>index-termstore</goal>
-                   </goals>
-                   <configuration>
-                       <quasiMojoName>full-classification</quasiMojoName>
-                   </configuration>
-               </execution>
-               <execution>
-                  <id>shutdown</id>
-                  <goals>
-                     <!-- <goal>stop-heap-ticker</goal>
-                     <goal>stop-tasks-ticker</goal>-->
-                     <goal>shutdown-isaac</goal>
+                                <!--                               <ibdfFile>${project.build.directory}/data/rf2-ibdf-sct-Full.ibdf</ibdfFile> --> 
+                                <!--                                <ibdfFile>${project.build.directory}/data/loinc-ibdf-tech-preview.ibdf</ibdfFile> --> 
+                                <!--                                <ibdfFile>${project.build.directory}/data/rxnorm-ibdf.ibdf</ibdfFile> --> 
+                                <!--                                <ibdfFile>${project.build.directory}/data/rf2-ibdf-us-extension-Full.ibdf</ibdfFile> --> 
+                            </ibdfFiles>
+                        </configuration>
+                    </execution>                    
+                    <execution>
+                        <id>count-after-load</id>
+                        <goals>
+                            <goal>count-concepts</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>index</id>
+                        <goals>
+                            <goal>index-termstore</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>classify</id>
+                        <goals>
+                            <goal>quasi-mojo-executor</goal>
+                            <goal>index-termstore</goal>
+                        </goals>
+                        <configuration>
+                            <quasiMojoName>full-classification</quasiMojoName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>shutdown</id>
+                        <goals>
+                            <!-- <goal>stop-heap-ticker</goal>
+                            <goal>stop-tasks-ticker</goal>-->
+                            <goal>shutdown-isaac</goal>
                            
-                  </goals>
-               </execution>
-            </executions>
-         </plugin>
-         <plugin>
-            <groupId>sh.isaac.solor</groupId>
-            <artifactId>solor-mojo</artifactId>
-            <version>${project.parent.version}</version>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>sh.isaac.solor</groupId>
+                <artifactId>solor-mojo</artifactId>
+                <version>${project.parent.version}</version>
                 <dependencies>
                     <dependency>
                         <groupId>sh.isaac.provider</groupId>
@@ -248,6 +248,11 @@
                         <groupId>sh.isaac.provider</groupId>
                         <artifactId>chronology</artifactId>
                         <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>identifier</artifactId>
+                        <version>${project.version}</version>
                     </dependency>
                     <dependency>
                         <groupId>sh.isaac.provider</groupId>
@@ -311,59 +316,59 @@
                         </exclusions>
                     </dependency>
                 </dependencies>
-            <executions>
-               <execution>
-                  <id>solor-import</id>
-                  <phase>process-resources</phase>
-                  <goals>
-                     <goal>solor-import</goal>
-                  </goals>
-                  <configuration>
-                      <importType>FULL</importType>
-                      <transform>true</transform>
-                     <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <executions>
-               <execution>
-                  <id>zip</id>
-                  <phase>package</phase>
-                  <goals>
-                     <goal>single</goal>
-                  </goals>
-                  <configuration>
-                     <skipAssembly>false</skipAssembly>
-                     <appendAssemblyId>false</appendAssemblyId>
-                     <descriptors>
-                        <descriptor>${basedir}/src/assembly/cradle.xml</descriptor>
-                     </descriptors>
-                     <encoding>UTF-8</encoding>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
-          <plugin>
-              <groupId>external.atlassian.jgitflow</groupId>
-              <artifactId>jgitflow-maven-plugin</artifactId>
-              <version>${jgitflow-maven-plugin.version}</version>
-              <configuration>
-                  <pushReleases>true</pushReleases>
-                  <autoVersionSubmodules>true</autoVersionSubmodules>
-                  <scmCommentPrefix>[jgitflow-plugin] </scmCommentPrefix>
-                  <enableSshAgent>true</enableSshAgent>
-                  <allowSnapshots>false</allowSnapshots>
-                  <enableFeatureVersions>true</enableFeatureVersions>
-                  <releaseBranchPrefix>solor-db-release-</releaseBranchPrefix>
-                  <versionTagPrefix>solor-db-version-</versionTagPrefix>
-                  <username>${git.user}</username>
-                  <password>${git.password}</password>
-              </configuration>
-          </plugin>
+                <executions>
+                    <execution>
+                        <id>solor-import</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>solor-import</goal>
+                        </goals>
+                        <configuration>
+                            <importType>FULL</importType>
+                            <transform>true</transform>
+                            <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>zip</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <skipAssembly>false</skipAssembly>
+                            <appendAssemblyId>false</appendAssemblyId>
+                            <descriptors>
+                                <descriptor>${basedir}/src/assembly/cradle.xml</descriptor>
+                            </descriptors>
+                            <encoding>UTF-8</encoding>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>external.atlassian.jgitflow</groupId>
+                <artifactId>jgitflow-maven-plugin</artifactId>
+                <version>${jgitflow-maven-plugin.version}</version>
+                <configuration>
+                    <pushReleases>true</pushReleases>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <scmCommentPrefix>[jgitflow-plugin] </scmCommentPrefix>
+                    <enableSshAgent>true</enableSshAgent>
+                    <allowSnapshots>false</allowSnapshots>
+                    <enableFeatureVersions>true</enableFeatureVersions>
+                    <releaseBranchPrefix>solor-db-release-</releaseBranchPrefix>
+                    <versionTagPrefix>solor-db-version-</versionTagPrefix>
+                    <username>${git.user}</username>
+                    <password>${git.password}</password>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -385,6 +390,6 @@
                     </execution>
                 </executions>
             </plugin>
-      </plugins>
-   </build>
+        </plugins>
+    </build>
 </project>
