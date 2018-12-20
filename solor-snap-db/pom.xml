@@ -4,14 +4,14 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.62</version>
+        <version>4.63</version>
     </parent>
     
     <groupId>one.solor</groupId>
     <artifactId>solor-snap-db</artifactId>
     <name>${project.parent.artifactId}: ${project.artifactId}</name>
     
-    <version>1.31-SNAPSHOT</version>
+    <version>1.31</version>
     <packaging>pom</packaging>
     
     <description>An ISAAC database, including Snomed SNAPSHOT data</description>
