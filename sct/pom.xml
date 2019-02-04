@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>one.solor</groupId>
     <artifactId>sct</artifactId>
-    <version>20180731T120000Z-build2-SNAPSHOT</version>
+    <version>20190131T120000Z-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
