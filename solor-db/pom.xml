@@ -155,7 +155,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <includeArtifactIds>sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us</includeArtifactIds>
+                            <includeArtifactIds>sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us,loinc</includeArtifactIds>
                             <outputDirectory>${project.build.directory}/data</outputDirectory>
                         </configuration>
                     </execution>
