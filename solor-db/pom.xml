@@ -4,7 +4,7 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.63</version>
+        <version>4.64</version>
     </parent>
     
     <groupId>one.solor</groupId>
@@ -17,7 +17,7 @@
     <description>An ISAAC database, including Snomed</description>
     
     <properties>
-        <sct.version>20180731T120000Z</sct.version>
+        <sct.version>20190131T120000Z</sct.version>
         <sct-au.version>20171031</sct-au.version>
         <sct-es.version>20171031T120000Z</sct-es.version>
         <sct-loinc.version>20170831T120000Z</sct-loinc.version>
@@ -70,7 +70,15 @@
             <optional>true</optional> <!-- Not needed at runtime / transitively -->
             <scope>compile</scope>
         </dependency>
-<!--        <dependency>
+        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-loinc</artifactId>
+            <version>${sct-loinc.version}</version>
+            <type>zip</type>
+            <optional>true</optional>  <!--  Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+        <!--        <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct-au</artifactId>
             <version>${sct-au.version}</version>
@@ -86,14 +94,7 @@
             <optional>true</optional>  Not needed at runtime / transitively 
             <scope>compile</scope>
         </dependency>-->
-<!--        <dependency>
-            <groupId>one.solor</groupId>
-            <artifactId>sct-loinc</artifactId>
-            <version>${sct-loinc.version}</version>
-            <type>zip</type>
-            <optional>true</optional>  Not needed at runtime / transitively 
-            <scope>compile</scope>
-        </dependency>-->
+
 <!--        <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct-uk</artifactId>
@@ -119,17 +120,17 @@
             <scope>compile</scope>
         </dependency>-->
 
-<!--  
-        <!-\- LOINC -\->
+  
+        <!-- LOINC -->
         <dependency>
-            <groupId>gov.vha.isaac.terminology.converted</groupId>
-            <artifactId>loinc-ibdf-tech-preview</artifactId>
-            <version>2015.08.01-loader-5.8-SNAPSHOT</version>
-            <type>ibdf.zip</type>
-            <optional>true</optional> <!-\- Not needed at runtime / transitively -\->
+            <groupId>one.solor</groupId>
+            <artifactId>loinc</artifactId>
+            <version>2.63</version>
+            <type>zip</type>
+            <optional>true</optional> <!-- Not needed at runtime / transitively -->
             <scope>compile</scope>
         </dependency>
-        
+        <!--        
         <dependency>
             <groupId>gov.vha.isaac.terminology.converted</groupId>
             <artifactId>rxnorm-ibdf</artifactId>
@@ -154,7 +155,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <includeArtifactIds>sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us</includeArtifactIds>
+                            <includeArtifactIds>sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us,loinc</includeArtifactIds>
                             <outputDirectory>${project.build.directory}/data</outputDirectory>
                         </configuration>
                     </execution>
