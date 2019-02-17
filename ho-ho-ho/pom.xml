@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>one.solor</groupId>
+   <artifactId>ho-ho-ho</artifactId>
+   <version>2019-02-09-SNAPSHOT</version>
+
+   <packaging>pom</packaging>
+
+   <name>Health ontology in tab-delimited text format</name>
+
+   <licenses>
+      <license>
+         <name>The Apache Software License, Version 2.0</name>
+         <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+         <distribution>repo</distribution>
+      </license>
+   </licenses>
+   <properties>
+      <solor.source.name>Health_Ontology_2019_02_09.tsv.zip</solor.source.name>
+      <isaac.version>4.52</isaac.version>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+   </properties>
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>external.atlassian.jgitflow</groupId>
+            <artifactId>jgitflow-maven-plugin</artifactId>
+            <version>1.0-m5.1</version>
+            <configuration>
+               <pushReleases>true</pushReleases>
+               <autoVersionSubmodules>true</autoVersionSubmodules>
+               <scmCommentPrefix>[jgitflow-plugin] </scmCommentPrefix>
+               <enableSshAgent>true</enableSshAgent>
+               <allowSnapshots>false</allowSnapshots>
+               <enableFeatureVersions>true</enableFeatureVersions>
+               <username>${git.user}</username>
+               <password>${git.password}</password>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+               <execution>
+                  <id>attach-artifact</id>
+                  <goals>
+                     <goal>attach-artifact</goal>
+                  </goals>
+                  <configuration>
+                     <artifacts>
+                        <artifact>
+                           <type>zip</type>
+                           <file>${basedir}/../solor-terminology-sources/${solor.source.name}</file>
+                        </artifact>
+                     </artifacts>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+   </build>
+</project>
