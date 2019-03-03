@@ -8,18 +8,26 @@
     </parent>
     
     <groupId>one.solor</groupId>
-    <artifactId>hodb</artifactId>
+    <artifactId>solor-us-db</artifactId>
     <name>${project.parent.artifactId}: ${project.artifactId}</name>
     
     <version>1.32-SNAPSHOT</version>
     <packaging>pom</packaging>
     
-    <description>An ISAAC database, including Snomed and health ontology data</description>
+    <description>An ISAAC database, including Snomed</description>
     
     <properties>
         <sct.version>20190131T120000Z</sct.version>
-        <ho.version>2019-02-20-SNAPSHOT</ho.version>
-        
+        <sct-au.version>20171031</sct-au.version>
+        <sct-es.version>20171031T120000Z</sct-es.version>
+        <sct-loinc.version>20170831T120000Z</sct-loinc.version>
+        <sct-uk.version>20171001T000001Z</sct-uk.version>
+        <sct-uk-dmd.version>20171011T000001Z</sct-uk-dmd.version>
+        <sct-us.version>20180901T120000Z</sct-us.version>
+
+        <loinc.version>2.65</loinc.version>
+        <rxnorm.version>2016.05.02-loader-5.2</rxnorm.version>
+
         <!-- Don't edit these -->
         <inParent>true</inParent>
         <isaac-metadata.version>${project.parent.version}</isaac-metadata.version>
@@ -54,22 +62,83 @@
             <type>ibdf.zip</type>
             <optional>true</optional> <!-- Not needed at runtime / transitively -->
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct</artifactId>
             <version>${sct.version}</version>
             <type>zip</type>
-            <optional>true</optional> <!-- Not needed at runtime / transitively -->
+            <optional>true</optional> <!-\- Not needed at runtime / transitively -\->
             <scope>compile</scope>
         </dependency>
+-->        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-loinc</artifactId>
+            <version>${sct-loinc.version}</version>
+            <type>zip</type>
+            <optional>true</optional>  <!--  Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+        <!--        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-au</artifactId>
+            <version>${sct-au.version}</version>
+            <type>zip</type>
+            <optional>true</optional>  Not needed at runtime / transitively 
+            <scope>compile</scope>
+        </dependency>-->
+<!--        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-es</artifactId>
+            <version>${sct-es.version}</version>
+            <type>zip</type>
+            <optional>true</optional>  Not needed at runtime / transitively 
+            <scope>compile</scope>
+        </dependency>-->
+
+<!--        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-uk</artifactId>
+            <version>${sct-uk.version}</version>
+            <type>zip</type>
+            <optional>true</optional>  Not needed at runtime / transitively 
+            <scope>compile</scope>
+        </dependency>-->
+<!--        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-uk-dmd</artifactId>
+            <version>${sct-uk-dmd.version}</version>
+            <type>zip</type>
+            <optional>true</optional>  Not needed at runtime / transitively 
+            <scope>compile</scope>
+        </dependency>-->
         <dependency>
             <groupId>one.solor</groupId>
-            <artifactId>ho-ho-ho</artifactId>
-            <version>${ho.version}</version>
+            <artifactId>sct-us</artifactId>
+            <version>${sct-us.version}</version>
+            <type>zip</type>
+            <optional>true</optional>  <!-- Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+
+  
+        <!-- LOINC -->
+        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>loinc</artifactId>
+            <version>2.63</version>
             <type>zip</type>
             <optional>true</optional> <!-- Not needed at runtime / transitively -->
             <scope>compile</scope>
         </dependency>
+        <!--        
+        <dependency>
+            <groupId>gov.vha.isaac.terminology.converted</groupId>
+            <artifactId>rxnorm-ibdf</artifactId>
+            <version>2016.12.05-loader-5.5-SNAPSHOT</version>
+            <type>ibdf.zip</type>
+            <optional>true</optional> <!-\- Not needed at runtime / transitively -\->
+            <scope>compile</scope>
+        </dependency> -->
     </dependencies>
 
     <build>
@@ -86,7 +155,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <includeArtifactIds>sct,ho-ho-ho</includeArtifactIds>
+                            <includeArtifactIds>sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us,loinc</includeArtifactIds>
                             <outputDirectory>${project.build.directory}/data</outputDirectory>
                         </configuration>
                     </execution>
@@ -125,6 +194,11 @@
                         <configuration>
                             <ibdfFiles>
                                 <ibdfFile>${project.build.directory}/data/IsaacMetadataAuxiliary.ibdf</ibdfFile>
+                                
+                                <!--                               <ibdfFile>${project.build.directory}/data/rf2-ibdf-sct-Full.ibdf</ibdfFile> --> 
+                                <!--                                <ibdfFile>${project.build.directory}/data/loinc-ibdf-tech-preview.ibdf</ibdfFile> --> 
+                                <!--                                <ibdfFile>${project.build.directory}/data/rxnorm-ibdf.ibdf</ibdfFile> --> 
+                                <!--                                <ibdfFile>${project.build.directory}/data/rf2-ibdf-us-extension-Full.ibdf</ibdfFile> --> 
                             </ibdfFiles>
                         </configuration>
                     </execution>                    
@@ -251,20 +325,8 @@
                             <goal>solor-import</goal>
                         </goals>
                         <configuration>
-                            <importType>ACTIVE_ONLY</importType>
+                            <importType>FULL</importType>
                             <transform>true</transform>
-                            <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>ho-import</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>ho-import</goal>
-                        </goals>
-                        <configuration>
-                            <transform>true</transform>
-                            <importType>ACTIVE_ONLY</importType>
                             <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
                         </configuration>
                     </execution>
