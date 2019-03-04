@@ -17,7 +17,7 @@
     <description>An ISAAC database, including Snomed and health ontology data</description>
     
     <properties>
-        <sct.version>20190131T120000Z</sct.version>
+        <sct.version>20190131T120000Z-b2</sct.version>
         <ho.version>2019-02-20-SNAPSHOT</ho.version>
         
         <!-- Don't edit these -->
@@ -251,7 +251,7 @@
                             <goal>solor-import</goal>
                         </goals>
                         <configuration>
-                            <importType>ACTIVE_ONLY</importType>
+                            <importType>FULL</importType>
                             <transform>true</transform>
                             <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
                         </configuration>
