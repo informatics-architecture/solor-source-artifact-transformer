@@ -18,7 +18,7 @@
     
     <properties>
         <sct.version>20190131T120000Z-b2</sct.version>
-        <ho.version>2019-02-20-SNAPSHOT</ho.version>
+        <ho.version>2019-03-12-SNAPSHOT</ho.version>
         
         <!-- Don't edit these -->
         <inParent>true</inParent>
@@ -264,7 +264,7 @@
                         </goals>
                         <configuration>
                             <transform>true</transform>
-                            <importType>ACTIVE_ONLY</importType>
+                            <importType>FULL</importType>
                             <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
                         </configuration>
                     </execution>
