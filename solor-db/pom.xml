@@ -27,7 +27,7 @@
         <sct-us.version>20170901T120000Z</sct-us.version>
 
         <loinc.version>2.65</loinc.version>
-        <rxnorm.version>2016.05.02-loader-5.2</rxnorm.version>
+        <rxnorm.version>20190719T000000Z-SNAPSHOT</rxnorm.version>
 
         <!-- Don't edit these -->
         <inParent>true</inParent>
@@ -77,6 +77,14 @@
             <groupId>one.solor</groupId>
             <artifactId>sct-loinc</artifactId>
             <version>${sct-loinc.version}</version>
+            <type>zip</type>
+            <optional>true</optional>  <!--  Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>rxnorm-owl</artifactId>
+            <version>${rxnorm.version}</version>
             <type>zip</type>
             <optional>true</optional>  <!--  Not needed at runtime / transitively -->
             <scope>compile</scope>
@@ -158,7 +166,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <includeArtifactIds>sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us,loinc
+                            <includeArtifactIds>rxnorm-owl,sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us,loinc
                             </includeArtifactIds>
                             <outputDirectory>${project.build.directory}/data</outputDirectory>
                         </configuration>
