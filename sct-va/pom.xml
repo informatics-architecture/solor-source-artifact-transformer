@@ -1,32 +1,32 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-   <modelVersion>4.0.0</modelVersion>
-   <groupId>one.solor</groupId>
-   <artifactId>sct-us</artifactId>
-    <version>20200301T120000Z-SNAPSHOT</version>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>one.solor</groupId>
+    <artifactId>sct-vha</artifactId>
+    <version>20181207T120000Z-SNAPSHOT</version>
 
-   <packaging>pom</packaging>
+    <packaging>pom</packaging>
 
-   <name>US Extension to SNOMED Clinical Terms in RF2 format</name>
+    <name>VHA SNOMED extension in RF2 format</name>
 
-   <licenses>
-      <license>
-         <name>The Apache Software License, Version 2.0</name>
-         <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-         <distribution>repo</distribution>
-      </license>
-      <license>
-         <name>SNOMED CT affiliate license agreement</name>
-         <url>https://uts.nlm.nih.gov/help/license/LicenseAgreement.pdf</url>
-         <comments>The SNOMED CT content packaged by this module 
-            is governed by the SNOMED CT affiliate license agreement.</comments>
-      </license>
-   </licenses>
-   <properties>
-       <solor.source.name>SnomedCT_USEditionRF2_PRODUCTION_20200301T120000Z.zip</solor.source.name>
-      <isaac.version>4.42</isaac.version>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-   </properties>
-   <build>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+        <license>
+            <name>SNOMED CT affiliate license agreement</name>
+            <url>https://uts.nlm.nih.gov/help/license/LicenseAgreement.pdf</url>
+            <comments>The SNOMED CT content packaged by this module 
+                is governed by the SNOMED CT affiliate license agreement.</comments>
+        </license>
+    </licenses>
+    <properties>
+        <solor.source.name>SnomedCT_VA-ExtensionRelease_PRODUCTION_20181207T120000Z.zip</solor.source.name>
+        <isaac.version>4.52</isaac.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <build>
         <plugins>
             <plugin>
                 <groupId>external.atlassian.jgitflow</groupId>

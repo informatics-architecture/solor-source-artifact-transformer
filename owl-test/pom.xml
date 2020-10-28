@@ -15,19 +15,19 @@
     <version>1.35-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <description>A Solor database, including Snomed, LOINC, RxNorm</description>
+    <description>An ISAAC database, including Snomed</description>
 
     <properties>
-        <sct.version>20200309T120000Z-SNAPSHOT</sct.version>
+        <sct.version>20190731T120000Z-SNAPSHOT</sct.version>
         <sct-au.version>20171031</sct-au.version>
         <sct-es.version>20171031T120000Z</sct-es.version>
         <sct-loinc.version>20170831T120000Z</sct-loinc.version>
         <sct-uk.version>20171001T000001Z</sct-uk.version>
         <sct-uk-dmd.version>20171011T000001Z</sct-uk-dmd.version>
-        <sct-us.version>20200301T120000Z-SNAPSHOT</sct-us.version>
+        <sct-us.version>20170901T120000Z</sct-us.version>
 
         <loinc.version>2.65</loinc.version>
-        <rxnorm.version>20200204-SNAPSHOT</rxnorm.version>
+        <rxnorm.version>2016.05.02-loader-5.2</rxnorm.version>
 
         <!-- Don't edit these -->
         <inParent>true</inParent>
@@ -77,14 +77,6 @@
             <groupId>one.solor</groupId>
             <artifactId>sct-loinc</artifactId>
             <version>${sct-loinc.version}</version>
-            <type>zip</type>
-            <optional>true</optional>  <!--  Not needed at runtime / transitively -->
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>one.solor</groupId>
-            <artifactId>rxnorm-owl</artifactId>
-            <version>${rxnorm.version}</version>
             <type>zip</type>
             <optional>true</optional>  <!--  Not needed at runtime / transitively -->
             <scope>compile</scope>
@@ -166,7 +158,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <includeArtifactIds>rxnorm-owl,sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us,loinc
+                            <includeArtifactIds>sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us,loinc
                             </includeArtifactIds>
                             <outputDirectory>${project.build.directory}/data</outputDirectory>
                         </configuration>
@@ -187,79 +179,6 @@
             <plugin>
                 <groupId>sh.isaac.core</groupId>
                 <artifactId>mojo</artifactId>
-                <dependencies>
-                    <dependency>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>progress</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>chronology</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>identifier</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>query</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>filesystem-datastore</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>sh.isaac.core</groupId>
-                        <artifactId>metacontent</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>ibdf</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>commit</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>path</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>stamp</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>coordinate</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>datastore-locator</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>logic</artifactId>
-                        <version>${project.parent.version}</version>
-                        <exclusions>
-                            <exclusion>
-                                <groupId>sh.isaac.provider</groupId>
-                                <artifactId>taxonomy</artifactId>
-                            </exclusion>
-                        </exclusions>
-                    </dependency>
-                </dependencies>
                 <executions>
                     <execution>
                         <id>setup-isaac</id>
@@ -386,7 +305,12 @@
                         <artifactId>datastore-locator</artifactId>
                         <version>${project.parent.version}</version>
                     </dependency>
-                     <dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>memory-managment</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
                         <groupId>sh.isaac.provider</groupId>
                         <artifactId>logic</artifactId>
                         <version>${project.parent.version}</version>

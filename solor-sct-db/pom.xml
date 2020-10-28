@@ -9,26 +9,17 @@
     </parent>
 
     <groupId>one.solor</groupId>
-    <artifactId>solor-db</artifactId>
+    <artifactId>solor-sct-db</artifactId>
     <name>${project.parent.artifactId}: ${project.artifactId}</name>
 
     <version>1.35-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <description>A Solor database, including Snomed, LOINC, RxNorm</description>
+    <description>A Solor database, including just SNOMED</description>
 
     <properties>
-        <sct.version>20200309T120000Z-SNAPSHOT</sct.version>
-        <sct-au.version>20171031</sct-au.version>
-        <sct-es.version>20171031T120000Z</sct-es.version>
-        <sct-loinc.version>20170831T120000Z</sct-loinc.version>
-        <sct-uk.version>20171001T000001Z</sct-uk.version>
-        <sct-uk-dmd.version>20171011T000001Z</sct-uk-dmd.version>
-        <sct-us.version>20200301T120000Z-SNAPSHOT</sct-us.version>
-
-        <loinc.version>2.65</loinc.version>
-        <rxnorm.version>20200204-SNAPSHOT</rxnorm.version>
-
+        <sct.version>20200731T120000Z-SNAPSHOT</sct.version>
+ 
         <!-- Don't edit these -->
         <inParent>true</inParent>
         <isaac-metadata.version>${project.parent.version}</isaac-metadata.version>
@@ -71,22 +62,6 @@
             <version>${sct.version}</version>
             <type>zip</type>
             <optional>true</optional> <!-- Not needed at runtime / transitively -->
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>one.solor</groupId>
-            <artifactId>sct-loinc</artifactId>
-            <version>${sct-loinc.version}</version>
-            <type>zip</type>
-            <optional>true</optional>  <!--  Not needed at runtime / transitively -->
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>one.solor</groupId>
-            <artifactId>rxnorm-owl</artifactId>
-            <version>${rxnorm.version}</version>
-            <type>zip</type>
-            <optional>true</optional>  <!--  Not needed at runtime / transitively -->
             <scope>compile</scope>
         </dependency>
         <!--        <dependency>
@@ -133,14 +108,6 @@
 
 
         <!-- LOINC -->
-        <dependency>
-            <groupId>one.solor</groupId>
-            <artifactId>loinc</artifactId>
-            <version>2.63</version>
-            <type>zip</type>
-            <optional>true</optional> <!-- Not needed at runtime / transitively -->
-            <scope>compile</scope>
-        </dependency>
         <!--        
         <dependency>
             <groupId>gov.vha.isaac.terminology.converted</groupId>

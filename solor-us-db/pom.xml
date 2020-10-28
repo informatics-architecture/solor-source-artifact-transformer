@@ -4,9 +4,9 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.65-SNAPSHOT</version>
+        <version>5.1.1-BATCH-SNAPSHOT</version>
     </parent>
-    
+
     <groupId>one.solor</groupId>
     <artifactId>solor-us-db</artifactId>
     <name>${project.parent.artifactId}: ${project.artifactId}</name>
@@ -14,26 +14,29 @@
     <version>1.32-SNAPSHOT</version>
     <packaging>pom</packaging>
     
-    <description>An ISAAC database, including Snomed</description>
-    
+
+    <description>A Solor database, including Snomed, LOINC, RxNorm</description>
+
     <properties>
-        <sct.version>20190131T120000Z</sct.version>
+        <sct.version>20200731T120000Z-SNAPSHOT</sct.version>
         <sct-au.version>20171031</sct-au.version>
         <sct-es.version>20171031T120000Z</sct-es.version>
         <sct-loinc.version>20170831T120000Z</sct-loinc.version>
         <sct-uk.version>20171001T000001Z</sct-uk.version>
         <sct-uk-dmd.version>20171011T000001Z</sct-uk-dmd.version>
-        <sct-us.version>20180901T120000Z</sct-us.version>
+        <sct-us.version>20200301T120000Z-SNAPSHOT</sct-us.version>
+        <vha.version>20181207T120000Z-SNAPSHOT</vha.version>
+        <logica.version>20200810T120000Z-SNAPSHOT</logica.version>
 
         <loinc.version>2.65</loinc.version>
-        <rxnorm.version>2016.05.02-loader-5.2</rxnorm.version>
+        <rxnorm.version>20200204-SNAPSHOT</rxnorm.version>
 
         <!-- Don't edit these -->
         <inParent>true</inParent>
         <isaac-metadata.version>${project.parent.version}</isaac-metadata.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -47,10 +50,12 @@
         <license>
             <name>SNOMED CT affiliate license agreement</name>
             <url>https://uts.nlm.nih.gov/help/license/LicenseAgreement.pdf</url>
-            <comments>The SNOMED CT content packaged by this module is governed by the SNOMED CT affiliate license agreement</comments>
+            <comments>The SNOMED CT content packaged by this module is governed by the SNOMED CT affiliate license
+                agreement
+            </comments>
         </license>
     </licenses>
-    
+
 
     <dependencies>
         <!-- Metadata -->
@@ -62,18 +67,45 @@
             <type>ibdf.zip</type>
             <optional>true</optional> <!-- Not needed at runtime / transitively -->
         </dependency>
-<!--        <dependency>
+        
+    
+         <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct</artifactId>
             <version>${sct.version}</version>
             <type>zip</type>
-            <optional>true</optional> <!-\- Not needed at runtime / transitively -\->
+            <optional>true</optional> <!-- Not needed at runtime / transitively -->
             <scope>compile</scope>
         </dependency>
--->        <dependency>
+    
+        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-logica</artifactId>
+            <version>${logica.version}</version>
+            <type>zip</type>
+            <optional>true</optional>  <!--  Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>sct-vha</artifactId>
+            <version>${vha.version}</version>
+            <type>zip</type>
+            <optional>true</optional>  <!--  Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>one.solor</groupId>
             <artifactId>sct-loinc</artifactId>
             <version>${sct-loinc.version}</version>
+            <type>zip</type>
+            <optional>true</optional>  <!--  Not needed at runtime / transitively -->
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>one.solor</groupId>
+            <artifactId>rxnorm-owl</artifactId>
+            <version>${rxnorm.version}</version>
             <type>zip</type>
             <optional>true</optional>  <!--  Not needed at runtime / transitively -->
             <scope>compile</scope>
@@ -86,41 +118,41 @@
             <optional>true</optional>  Not needed at runtime / transitively 
             <scope>compile</scope>
         </dependency>-->
-<!--        <dependency>
-            <groupId>one.solor</groupId>
-            <artifactId>sct-es</artifactId>
-            <version>${sct-es.version}</version>
-            <type>zip</type>
-            <optional>true</optional>  Not needed at runtime / transitively 
-            <scope>compile</scope>
-        </dependency>-->
+        <!--        <dependency>
+                    <groupId>one.solor</groupId>
+                    <artifactId>sct-es</artifactId>
+                    <version>${sct-es.version}</version>
+                    <type>zip</type>
+                    <optional>true</optional>  Not needed at runtime / transitively
+                    <scope>compile</scope>
+                </dependency>-->
 
-<!--        <dependency>
-            <groupId>one.solor</groupId>
-            <artifactId>sct-uk</artifactId>
-            <version>${sct-uk.version}</version>
-            <type>zip</type>
-            <optional>true</optional>  Not needed at runtime / transitively 
-            <scope>compile</scope>
-        </dependency>-->
-<!--        <dependency>
-            <groupId>one.solor</groupId>
-            <artifactId>sct-uk-dmd</artifactId>
-            <version>${sct-uk-dmd.version}</version>
-            <type>zip</type>
-            <optional>true</optional>  Not needed at runtime / transitively 
-            <scope>compile</scope>
-        </dependency>-->
+        <!--        <dependency>
+                    <groupId>one.solor</groupId>
+                    <artifactId>sct-uk</artifactId>
+                    <version>${sct-uk.version}</version>
+                    <type>zip</type>
+                    <optional>true</optional>  Not needed at runtime / transitively
+                    <scope>compile</scope>
+                </dependency>-->
+        <!--        <dependency>
+                    <groupId>one.solor</groupId>
+                    <artifactId>sct-uk-dmd</artifactId>
+                    <version>${sct-uk-dmd.version}</version>
+                    <type>zip</type>
+                    <optional>true</optional>  Not needed at runtime / transitively
+                    <scope>compile</scope>
+                </dependency>-->
         <dependency>
-            <groupId>one.solor</groupId>
-            <artifactId>sct-us</artifactId>
-            <version>${sct-us.version}</version>
-            <type>zip</type>
-            <optional>true</optional>  <!-- Not needed at runtime / transitively -->
-            <scope>compile</scope>
+           <groupId>one.solor</groupId>
+           <artifactId>sct-us</artifactId>
+           <version>${sct-us.version}</version>
+           <type>zip</type>
+           <optional>true</optional>  <!-- Not needed at runtime / transitively -->
+           <scope>compile</scope>
         </dependency>
 
-  
+
         <!-- LOINC -->
         <dependency>
             <groupId>one.solor</groupId>
@@ -155,7 +187,8 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <includeArtifactIds>sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us,loinc</includeArtifactIds>
+                            <includeArtifactIds>sct-logica,sct-vha,rxnorm-owl,sct,sct-au,sct-es,sct-loinc,sct-uk,sct-uk-dmd,sct-us,loinc
+                            </includeArtifactIds>
                             <outputDirectory>${project.build.directory}/data</outputDirectory>
                         </configuration>
                     </execution>
@@ -175,6 +208,79 @@
             <plugin>
                 <groupId>sh.isaac.core</groupId>
                 <artifactId>mojo</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>progress</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>chronology</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>identifier</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>query</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>filesystem-datastore</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.core</groupId>
+                        <artifactId>metacontent</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>ibdf</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>commit</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>path</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>stamp</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>coordinate</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>datastore-locator</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>logic</artifactId>
+                        <version>${project.parent.version}</version>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>sh.isaac.provider</groupId>
+                                <artifactId>taxonomy</artifactId>
+                            </exclusion>
+                        </exclusions>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <id>setup-isaac</id>
@@ -183,7 +289,8 @@
                             <goal>count-concepts</goal>
                         </goals>
                         <configuration>
-                            <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
+                            <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/
+                            </dataStoreLocation>
                         </configuration>
                     </execution>
                     <execution>
@@ -194,14 +301,14 @@
                         <configuration>
                             <ibdfFiles>
                                 <ibdfFile>${project.build.directory}/data/IsaacMetadataAuxiliary.ibdf</ibdfFile>
-                                
-                                <!--                               <ibdfFile>${project.build.directory}/data/rf2-ibdf-sct-Full.ibdf</ibdfFile> --> 
-                                <!--                                <ibdfFile>${project.build.directory}/data/loinc-ibdf-tech-preview.ibdf</ibdfFile> --> 
-                                <!--                                <ibdfFile>${project.build.directory}/data/rxnorm-ibdf.ibdf</ibdfFile> --> 
-                                <!--                                <ibdfFile>${project.build.directory}/data/rf2-ibdf-us-extension-Full.ibdf</ibdfFile> --> 
+
+                                <!--                               <ibdfFile>${project.build.directory}/data/rf2-ibdf-sct-Full.ibdf</ibdfFile> -->
+                                <!--                                <ibdfFile>${project.build.directory}/data/loinc-ibdf-tech-preview.ibdf</ibdfFile> -->
+                                <!--                                <ibdfFile>${project.build.directory}/data/rxnorm-ibdf.ibdf</ibdfFile> -->
+                                <!--                                <ibdfFile>${project.build.directory}/data/rf2-ibdf-us-extension-Full.ibdf</ibdfFile> -->
                             </ibdfFiles>
                         </configuration>
-                    </execution>                    
+                    </execution>
                     <execution>
                         <id>count-after-load</id>
                         <goals>
@@ -230,7 +337,7 @@
                             <!-- <goal>stop-heap-ticker</goal>
                             <goal>stop-tasks-ticker</goal>-->
                             <goal>shutdown-isaac</goal>
-                           
+
                         </goals>
                     </execution>
                 </executions>
@@ -300,12 +407,7 @@
                         <artifactId>datastore-locator</artifactId>
                         <version>${project.parent.version}</version>
                     </dependency>
-                    <dependency>
-                        <groupId>sh.isaac.provider</groupId>
-                        <artifactId>memory-managment</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                    <dependency>
+                     <dependency>
                         <groupId>sh.isaac.provider</groupId>
                         <artifactId>logic</artifactId>
                         <version>${project.parent.version}</version>
@@ -327,7 +429,8 @@
                         <configuration>
                             <importType>FULL</importType>
                             <transform>true</transform>
-                            <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
+                            <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/
+                            </dataStoreLocation>
                         </configuration>
                     </execution>
                 </executions>
@@ -352,23 +455,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>external.atlassian.jgitflow</groupId>
-                <artifactId>jgitflow-maven-plugin</artifactId>
-                <version>${jgitflow-maven-plugin.version}</version>
-                <configuration>
-                    <pushReleases>true</pushReleases>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <scmCommentPrefix>[jgitflow-plugin] </scmCommentPrefix>
-                    <enableSshAgent>true</enableSshAgent>
-                    <allowSnapshots>false</allowSnapshots>
-                    <enableFeatureVersions>true</enableFeatureVersions>
-                    <releaseBranchPrefix>solor-db-release-</releaseBranchPrefix>
-                    <versionTagPrefix>solor-db-version-</versionTagPrefix>
-                    <username>${git.user}</username>
-                    <password>${git.password}</password>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

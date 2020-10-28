@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>one.solor</groupId>
     <artifactId>rxnorm-owl</artifactId>
-    <version>20190719T000000Z-SNAPSHOT</version>
+    <version>20200204-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -22,7 +22,7 @@
         </license>
     </licenses>
     <properties>
-        <solor.source.name>RxNorm-defined-with-SNCT-classes-20190719.zip</solor.source.name>
+        <solor.source.name>RxNorm2Snomed-Jan2020.rdf.xml.zip</solor.source.name>
         <isaac.version>4.52</isaac.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

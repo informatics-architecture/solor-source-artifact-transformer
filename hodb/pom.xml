@@ -4,7 +4,7 @@
     <parent>
         <groupId>sh.isaac.integration</groupId>
         <artifactId>db-builder</artifactId>
-        <version>4.66-SNAPSHOT</version>
+        <version>5.1.1-BATCH-SNAPSHOT</version>
     </parent>
     
     <groupId>one.solor</groupId>
@@ -17,7 +17,7 @@
     <description>An ISAAC database, including Snomed and health ontology data</description>
     
     <properties>
-        <sct.version>20190131T120000Z-b2</sct.version>
+        <sct.version>20200309T120000Z-SNAPSHOT</sct.version>
         <ho.version>2019-04-23-SNAPSHOT</ho.version>
         
         <!-- Don't edit these -->
@@ -106,66 +106,17 @@
             <plugin>
                 <groupId>sh.isaac.core</groupId>
                 <artifactId>mojo</artifactId>
-                <executions>
-                    <execution>
-                        <id>setup-isaac</id>
-                        <goals>
-                            <goal>setup-isaac</goal>
-                            <goal>count-concepts</goal>
-                        </goals>
-                        <configuration>
-                            <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>load-ibdf-metadata</id>
-                        <goals>
-                            <goal>load-termstore-semaphore</goal>
-                        </goals>
-                        <configuration>
-                            <ibdfFiles>
-                                <ibdfFile>${project.build.directory}/data/IsaacMetadataAuxiliary.ibdf</ibdfFile>
-                            </ibdfFiles>
-                        </configuration>
-                    </execution>                    
-                    <execution>
-                        <id>count-after-load</id>
-                        <goals>
-                            <goal>count-concepts</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>index</id>
-                        <goals>
-                            <goal>index-termstore</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>classify</id>
-                        <goals>
-                            <goal>quasi-mojo-executor</goal>
-                            <goal>index-termstore</goal>
-                        </goals>
-                        <configuration>
-                            <quasiMojoName>full-classification</quasiMojoName>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>shutdown</id>
-                        <goals>
-                            <!-- <goal>stop-heap-ticker</goal>
-                            <goal>stop-tasks-ticker</goal>-->
-                            <goal>shutdown-isaac</goal>
-                           
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>sh.isaac.solor</groupId>
-                <artifactId>solor-mojo</artifactId>
-                <version>${project.parent.version}</version>
                 <dependencies>
+                    <dependency>
+                        <groupId>org.eclipse.collections</groupId>
+                        <artifactId>eclipse-collections-api</artifactId>
+                        <version>10.2.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.eclipse.collections</groupId>
+                        <artifactId>eclipse-collections</artifactId>
+                        <version>10.2.0</version>
+                    </dependency>
                     <dependency>
                         <groupId>sh.isaac.provider</groupId>
                         <artifactId>progress</artifactId>
@@ -228,7 +179,144 @@
                     </dependency>
                     <dependency>
                         <groupId>sh.isaac.provider</groupId>
-                        <artifactId>memory-managment</artifactId>
+                        <artifactId>logic</artifactId>
+                        <version>${project.parent.version}</version>
+                        <exclusions>
+                            <exclusion>
+                                <groupId>sh.isaac.provider</groupId>
+                                <artifactId>taxonomy</artifactId>
+                            </exclusion>
+                        </exclusions>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>setup-isaac</id>
+                        <goals>
+                            <goal>setup-isaac</goal>
+                            <goal>count-concepts</goal>
+                        </goals>
+                        <configuration>
+                            <dataStoreLocation>${project.build.directory}/${project.build.finalName}.data/</dataStoreLocation>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>load-ibdf-metadata</id>
+                        <goals>
+                            <goal>load-termstore-semaphore</goal>
+                        </goals>
+                        <configuration>
+                            <ibdfFiles>
+                                <ibdfFile>${project.build.directory}/data/IsaacMetadataAuxiliary.ibdf</ibdfFile>
+                            </ibdfFiles>
+                        </configuration>
+                    </execution>                    
+                    <execution>
+                        <id>count-after-load</id>
+                        <goals>
+                            <goal>count-concepts</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>index</id>
+                        <goals>
+                            <goal>index-termstore</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>classify</id>
+                        <goals>
+                            <goal>quasi-mojo-executor</goal>
+                            <goal>index-termstore</goal>
+                        </goals>
+                        <configuration>
+                            <quasiMojoName>full-classification</quasiMojoName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>shutdown</id>
+                        <goals>
+                            <!-- <goal>stop-heap-ticker</goal>
+                            <goal>stop-tasks-ticker</goal>-->
+                            <goal>shutdown-isaac</goal>
+                           
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>sh.isaac.solor</groupId>
+                <artifactId>solor-mojo</artifactId>
+                <version>${project.parent.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.eclipse.collections</groupId>
+                        <artifactId>eclipse-collections-api</artifactId>
+                        <version>10.2.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.eclipse.collections</groupId>
+                        <artifactId>eclipse-collections</artifactId>
+                        <version>10.2.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>progress</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>chronology</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>identifier</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>query</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>filesystem-datastore</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.core</groupId>
+                        <artifactId>metacontent</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>ibdf</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>commit</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>path</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>stamp</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>coordinate</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>sh.isaac.provider</groupId>
+                        <artifactId>datastore-locator</artifactId>
                         <version>${project.parent.version}</version>
                     </dependency>
                     <dependency>
@@ -243,6 +331,7 @@
                         </exclusions>
                     </dependency>
                 </dependencies>
+                
                 <executions>
                     <execution>
                         <id>solor-import</id>
@@ -290,23 +379,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>external.atlassian.jgitflow</groupId>
-                <artifactId>jgitflow-maven-plugin</artifactId>
-                <version>${jgitflow-maven-plugin.version}</version>
-                <configuration>
-                    <pushReleases>true</pushReleases>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <scmCommentPrefix>[jgitflow-plugin] </scmCommentPrefix>
-                    <enableSshAgent>true</enableSshAgent>
-                    <allowSnapshots>false</allowSnapshots>
-                    <enableFeatureVersions>true</enableFeatureVersions>
-                    <releaseBranchPrefix>solor-db-release-</releaseBranchPrefix>
-                    <versionTagPrefix>solor-db-version-</versionTagPrefix>
-                    <username>${git.user}</username>
-                    <password>${git.password}</password>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
